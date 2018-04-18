@@ -17,7 +17,7 @@ def power(a, n):
 	a_power.append(1) # a^0
 	a_power.append(a) # a^1
 
-	# 2^0, 2^1, 2^2, 2^4
+	# 2^0, 2^1, 2^2, 2^4, 2^8
 	binary_index = []
 	binary_index.append(0)
 	binary_index.append(1)
@@ -27,32 +27,35 @@ def power(a, n):
 
 	'''
 	Get binary_index of 2^power:
-		 0, 2^0, 2^1, 2^2
+		 0, 2^0, 2^1, 2^2, 2^3
 	power of a:
-		 1, a^(2^0), a^(2^1), a^(2^2)
+		 1, a^(2^0), a^(2^1), a^(2^2), a^(2^3)
 	'''
-	
+
 	while n > num:
 		binary_index.append(num)
 		a_power.append(accum)
 		accum *= accum
-		num *= num
+		num *= 2
 
 	product = 1
 	index = len(binary_index) - 1
 	while n >= 1 and index > 0:
 		if n < binary_index[index]:
 			index -= 1
+			continue
+
 		times = int(n / binary_index[index])
 		for i in range(times):
 			product *= a_power[index]
 		n = n % binary_index[index]
-	print(product)
+
+	return product
 
 
 
 if __name__ == '__main__':
-	a = sys.argv[1]
-	n = sys.argv[2]
+	a = int(sys.argv[1])
+	n = int(sys.argv[2])
 
-	print(power(a, n))
+	print(power(a, n), pow(a, n))
