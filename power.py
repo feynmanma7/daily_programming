@@ -1,5 +1,20 @@
 import sys
 
+def power_great(a, n):
+
+	product = 1
+
+	while n:
+
+		if n & 1:
+			product = product * a
+
+		n >>= 1 # a = int(a / 2)
+		a = a * a
+
+	return product
+
+
 def power(a, n):
 	a = int(a)
 	n = int(n)
@@ -58,4 +73,4 @@ if __name__ == '__main__':
 	a = int(sys.argv[1])
 	n = int(sys.argv[2])
 
-	print(power(a, n), pow(a, n))
+	print(power(a, n), pow(a, n), power_great(a, n))
